@@ -1,0 +1,3 @@
+POST https://www.google.com/recaptcha/api/siteverify
+    ?secret=YOUR_SECRET_KEY
+    &response=TOKEN
