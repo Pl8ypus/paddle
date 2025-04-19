@@ -1,0 +1,24 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const submitBtn = form.querySelector("button[type='submit'], input[type='submit']");
+
+    let isSubmitting = false;
+
+    form.addEventListener("submit", function (e) {
+      if (isSubmitting) {
+        e.preventDefault();
+        return false;
+      }
+      isSubmitting = true;
+
+      // Optional: visually disable the button
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.6";
+        submitBtn.style.pointerEvents = "none";
+        submitBtn.innerText = "Submitting...";
+      }
+    });
+  });
+</script>
