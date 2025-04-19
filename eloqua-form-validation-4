@@ -1,0 +1,7 @@
+<style>
+  .field-error {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #e60000;
+  }
+</style>
