@@ -1,0 +1,29 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function (e) {
+      const invalidFields = form.querySelectorAll(':invalid');
+
+      invalidFields.forEach(field => {
+        // Remove old message
+        const existing = field.parentElement.querySelector('.field-error');
+        if (existing) existing.remove();
+
+        // Create new message
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'field-error';
+        errorMsg.style.color = '#e60000';
+        errorMsg.style.fontSize = '13px';
+        errorMsg.style.marginTop = '4px';
+        errorMsg.innerText = field.validationMessage;
+
+        field.parentElement.appendChild(errorMsg);
+      });
+
+      if (invalidFields.length > 0) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
