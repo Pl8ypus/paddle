@@ -1,0 +1,6 @@
+<style>
+  button[disabled], input[type="submit"][disabled] {
+    cursor: not-allowed;
+    background-color: #ccc !important;
+  }
+</style>
