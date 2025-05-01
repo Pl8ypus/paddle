@@ -1,0 +1,15 @@
+<script>
+  function getUTMParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utms = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+    utms.forEach(param => {
+      const value = urlParams.get(param);
+      if (value) {
+        const field = document.getElementById(param);
+        if (field) field.value = value;
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', getUTMParams);
+</script>
