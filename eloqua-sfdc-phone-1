@@ -1,0 +1,7 @@
+<select id="countrySelect" name="country">
+  <option value="">Select Country</option>
+  <option value="us">United States of America</option>
+  <option value="ca">Canada</option>
+  <option value="gb">United Kingdom</option>
+  <!-- Add more countries here -->
+</select>
