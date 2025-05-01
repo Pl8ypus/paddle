@@ -1,0 +1,27 @@
+<script>
+  function handleFormSubmit(form) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", form.action);
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        // Hide the form
+        form.style.display = 'none';
+        // Show the thank-you message
+        document.getElementById('form-success-message').style.display = 'block';
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    };
+
+    xhr.onerror = function () {
+      alert('An error occurred. Please try again.');
+    };
+
+    xhr.send(formData);
+    return false;
+  }
+</script>
