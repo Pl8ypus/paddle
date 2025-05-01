@@ -1,0 +1,34 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const phoneInput = document.getElementById('phoneNumber');
+    const countrySelect = document.getElementById('countrySelect');
+
+    countrySelect.addEventListener('change', function () {
+      const selectedCountry = this.value;
+      phoneInput.value = ''; // reset input
+
+      switch (selectedCountry) {
+        case 'us':
+          phoneInput.placeholder = '(555) 555-5555';
+          phoneInput.addEventListener('input', formatUSPhone);
+          break;
+        default:
+          phoneInput.placeholder = 'Phone Number';
+          phoneInput.removeEventListener('input', formatUSPhone);
+          break;
+      }
+    });
+
+    function formatUSPhone(e) {
+      let value = e.target.value.replace(/\D/g, '').slice(0, 10);
+      const area = value.slice(0, 3);
+      const mid = value.slice(3, 6);
+      const last = value.slice(6, 10);
+      let result = '';
+      if (area) result += `(${area}`;
+      if (mid) result += `) ${mid}`;
+      if (last) result += `-${last}`;
+      e.target.value = result;
+    }
+  });
+</script>
