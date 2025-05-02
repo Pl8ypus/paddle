@@ -1,10 +1,21 @@
 <script>
-(function storeUTMs() {
+(function manageUTMs() {
   const params = new URLSearchParams(window.location.search);
   const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+
   utmKeys.forEach(key => {
-    const value = params.get(key);
-    if (value) localStorage.setItem(key, value);
+    // Step 1: Capture from URL
+    const valueFromURL = params.get(key);
+    if (valueFromURL) {
+      localStorage.setItem(key, valueFromURL);
+    }
+
+    // Step 2: Load from storage and populate hidden fields
+    const stored = localStorage.getItem(key);
+    const field = document.getElementById(key);
+    if (stored && field) {
+      field.value = stored;
+    }
   });
 })();
 </script>
