@@ -1,0 +1,47 @@
+<script>
+  function getParam(name) {
+    const results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
+    return results ? decodeURIComponent(results[1]) : null;
+  }
+
+  function setUTMField(name, value) {
+    const field = document.querySelector(`input[name="${name}"]`);
+    if (field && value) field.value = value;
+  }
+
+  const utmParams = ['utm_source', 'utm_medium', 'utm_campaign'];
+  let hasUTM = false;
+
+  utmParams.forEach(param => {
+    const val = getParam(param);
+    if (val) {
+      setUTMField(param, val);
+      hasUTM = true;
+    }
+  });
+
+  if (!hasUTM && document.referrer) {
+    const ref = document.referrer;
+    let source = '', medium = 'referral';
+
+    if (ref.includes('google.')) {
+      source = 'google';
+      medium = 'organic';
+    } else if (ref.includes('facebook.')) {
+      source = 'facebook';
+    } else if (ref.includes('linkedin.')) {
+      source = 'linkedin';
+    } else {
+      try {
+        const url = new URL(ref);
+        source = url.hostname.replace('www.', '');
+      } catch (e) {
+        source = 'unknown';
+      }
+    }
+
+    setUTMField('utm_source', source);
+    setUTMField('utm_medium', medium);
+    setUTMField('utm_campaign', 'inferred');
+  }
+</script>
